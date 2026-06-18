@@ -1,19 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SBX AI Image Studio</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>SBX AI Image Studio</h1>
+  <main class="app">
+    <section class="hero">
+      <div class="badge">SBX MEDIA</div>
+      <h1>SBX AI Image Studio</h1>
+      <p>Free AI image generator for posters, reels, products, thumbnails and creative concepts.</p>
+    </section>
 
-  <textarea id="prompt" placeholder="Enter prompt"></textarea>
-  <br><br>
+    <section class="studio">
+      <div class="controls">
+        <label>Describe your image</label>
+        <textarea id="prompt" placeholder="Example: luxury jewellery product photo on purple silk, cinematic lighting"></textarea>
 
-  <button onclick="generateImage()">Generate</button>
+        <button onclick="generateImage()" id="generateBtn">Generate Image</button>
+        <p id="status"></p>
+      </div>
 
-  <br><br>
-
-  <img id="result" width="500">
+      <div class="preview">
+        <div class="imageBox">
+          <img id="result" alt="Generated image" />
+        </div>
+        <a id="downloadBtn" download="sbx-ai-image.png">Download PNG</a>
+      </div>
+    </section>
+  </main>
 
   <script src="script.js"></script>
 </body>
