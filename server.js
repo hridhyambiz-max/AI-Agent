@@ -16,24 +16,26 @@ app.use(express.static("public"));
 
 app.post("/api/generate-image", async (req, res) => {
   try {
-    const { prompt, size, style } = req.body;
+    const { prompt } = req.body;
+
+    if (!prompt) {
+      return res.status(400).json({ error: "Prompt required" });
+    }
 
     const result = await openai.images.generate({
       model: "gpt-image-1",
-      prompt: `${prompt} | Style: ${style}`,
-      size: size || "1024x1024"
+      prompt: prompt,
+      size: "1024x1024"
     });
 
-    const imageBase64 = result.data[0].b64_json;
-
     res.json({
-      image: `data:image/png;base64,${imageBase64}`
+      image: `data:image/png;base64,${result.data[0].b64_json}`
     });
 
   } catch (error) {
-    console.error(error);
+    console.error("IMAGE ERROR:", error);
     res.status(500).json({
-      error: "Image generation failed"
+      error: error.message || "Image generation failed"
     });
   }
 });
